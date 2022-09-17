@@ -82,6 +82,29 @@ button:hover {
   background-color: var(--dark)
 }
 
+.operations-list {
+  margin-left:50px;
+  text-align:left;
+  margin-top:0;
+}
+
+.operations-list h2 {
+  margin-bottom: 15px;
+}
+
+.operations-list li {
+  list-style-type: none;
+  margin-bottom:4px;
+}
+
 #save {
-  color:black;
+  width:100%;
+  background-color: var(--light)
+}
+
+#save-button {
+  width:100%;
+  background-color: var(--dark);
+  color: var(--primary);
+  font-weight:600;
 }

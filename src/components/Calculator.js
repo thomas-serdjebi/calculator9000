@@ -5,6 +5,7 @@ import MagnificientEqualButton from './MagnificientEqualButton'
 import React, { useState } from 'react';
 import ItsOverNineThousand from './ItsOverNineThousand'
 import PowerfullSaveButton from './PowerfullSaveButton'
+import OperationsList from './OperationsList'
 
 function Calculator(props){
 
@@ -23,7 +24,7 @@ function Calculator(props){
         case '=':
           setOperation(operation+event)
           setOp(operation+event)
-          let opRes = eval(operation)
+          let opRes = eval(operation).toFixed(2)
           setOperation(opRes)
           setResult(opRes)
         break;
@@ -31,6 +32,9 @@ function Calculator(props){
         case 'DEL':
           setOperation('')
           setResult('')
+        break;
+
+        case 'SAVE': 
         break;
 
         default:
@@ -51,20 +55,13 @@ function Calculator(props){
           setOperation('')
           setResult('')
         break;
-
         
         case 'SAVE' : 
-
-          console.log(op)
-          console.log(result)
-
           let data = new FormData()
           data.append('operation', op)
           data.append('result', result)
 
-          console.log(data)
-
-          fetch('http://localhost/calculator9000/src/php/save.php', {
+          fetch('http://localhost/calculator9000/src/php/operations.php', {
             method: 'POST',
             body: data
           }).catch(function (error) {
@@ -88,16 +85,20 @@ function Calculator(props){
   }
  
   return (
-  <div className="App">
-    <ItsOverNineThousand  result={result}/>
-    <div className="calculator">
-      <BeautifulScreen operation={operation}/>
-      <GreatOperationButton handleClick={handleClick}/>
-      <div className="digits">
-        <AmazingNumberButton handleClick={handleClick}/>
-        <MagnificientEqualButton handleClick={handleClick}/>
+  <div>
+    <div className="App">
+      <ItsOverNineThousand  result={result}/>
+      <div className="calculator">
+        <BeautifulScreen operation={operation}/>
+        <GreatOperationButton handleClick={handleClick}/>
+        <div className="digits">
+          <AmazingNumberButton handleClick={handleClick}/>
+          <MagnificientEqualButton handleClick={handleClick}/>
+        </div>
         <PowerfullSaveButton handleClick={handleClick}/>
+
       </div>
+      <OperationsList />
     </div>
   </div>
   ) 
